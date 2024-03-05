@@ -61,4 +61,13 @@ class MainTest {
   }
 
   // TODO: Create your test(s) below. /////////////////////////////////////////
+  @Test
+  void testFailureToRun() {
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    System.setOut(new PrintStream(outputStream));
+    Main.main(new String[]{"./sample-texts/green-golden-slipper.txt"});
+    System.setOut(System.out);
+    String output = outputStream.toString().trim();
+    assertTrue(output.startsWith("Ignoring ./sample-texts/non-existant-file.txt:"));
+  }
 }
